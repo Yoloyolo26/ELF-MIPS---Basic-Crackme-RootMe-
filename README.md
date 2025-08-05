@@ -26,7 +26,7 @@ we find something intersting it may hide some passwd or the flag there, step int
 
 ### analyise the file  
 ![image](https://github.com/Yoloyolo26/ELF-MIPS---Basic-Crackme-RootMe-/blob/main/images/func%202025-08-05%20122103.png)   
-we noticed that the it a Cross References (or simply XREFs)  
+we noticed that the it a Cross References (or simply XREFs)    
 
 moving on the __sub_4007C0__ and __sub_400814__  
 ![image](https://github.com/Yoloyolo26/ELF-MIPS---Basic-Crackme-RootMe-/blob/main/images/func1%202025-08-05%20123029.png)   
@@ -37,28 +37,42 @@ it seem just a print func ,we need using xref to find the calling func , target 
 it only one derection!!!  step in it !
 
 ### check the graph overview
-only one area uisng __jal__ to jump to this address
-![image]()
+only one area uisng __jal__ to jump into this address  
+![image](https://github.com/Yoloyolo26/ELF-MIPS---Basic-Crackme-RootMe-/blob/main/images/jal%202025-08-05%20170717.png)
 So we look back along this area  
-at there you can find many structures like this  
+  
+at there you can find many structures like this    
 ![image](https://github.com/Yoloyolo26/ELF-MIPS---Basic-Crackme-RootMe-/blob/main/images/structure%202025-08-05%20130711.png)   
 
 by reading the assemble code we can know that is an strings check func to see the enter passwd is right or not  
+
 we write down all the charaters and the stack offset  
 ![image](https://github.com/Yoloyolo26/ELF-MIPS---Basic-Crackme-RootMe-/blob/main/images/var%202025-08-05%20155933.png)   
+### two special func
+there are two special area in this main func  
 
-there are two special area in this main func   
-__$__ _one is a loop that will load the serval times __i__ into memory_  
-  but many times does it load ? let us check the assembly code  
+__$__ _one is a loop that will load the serval times __i__ into memory_    
+
+but many times does it load ? let us check the assembly code  
   
 ![image](https://github.com/Yoloyolo26/ELF-MIPS---Basic-Crackme-RootMe-/blob/main/images/special1r%202025-08-05%20161200.png) 
 
-the __var_50__ was initialized as __-0x50__ on the top of main func, and the init i is -0x68 plus 0x50 whcih is 8, and i ++ in each loop the jupm out condition `slti    $v0, 0x11` equals __< 17__     
+the __var_50__ was initialized as __-0x50__ on the top of main func  
+  
+and the init i is -0x68 plus 0x50 whcih is 8   
+
+and i ++ in each loop the jupm out condition `slti    $v0, 0x11` equals __< 17__   
+
 so the whole assemebly loop code above in c++ is like   
-`for (int i = 8 , i < 17 ,i ++)`  
-it will load __i__ 9 times  into memeroy   
-`access address = ($fp - 0x4C) + i = input_start + i`  
-so the stack offset of i is start from __0x44__ to __0x3c__   
+
+`for (int i = 8 , i < 17 ,i ++)`    
+
+it will load __i__ 9 times  into memeroy    
+
+`access address = ($fp - 0x4C) + i = input_start + i`    
+
+so the stack offset of i is start from __0x44__ to __0x3c__    
+
 taking a note of this and see next one   
 
 __$__ _the another area is making sure that the values of __var_48 (R)__  and __var_47__ differ by three , so the value of the __var_47__ is __(u)   
@@ -69,7 +83,7 @@ now we got all the charaters of that "possible passwd" ，We sort by offset from
 
 there we have itt!!!!that the final flagg!!!!
 
-### the finnal falg is __cantnotrunmiiiiiiiiips__
+### the finnal falg is `cantnotrunmiiiiiiiiips`
 
 
 
