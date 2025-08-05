@@ -26,7 +26,7 @@ we find something intersting it may hide some passwd or the flag there, step int
 
 ### analyise the file  
 ![image](https://github.com/Yoloyolo26/ELF-MIPS---Basic-Crackme-RootMe-/blob/main/images/func%202025-08-05%20122103.png)   
-we noticed that the it an Cross References (or simply XREFs)  
+we noticed that the it a Cross References (or simply XREFs)  
 
 moving on the __sub_4007C0__ and __sub_400814__  
 ![image](https://github.com/Yoloyolo26/ELF-MIPS---Basic-Crackme-RootMe-/blob/main/images/func1%202025-08-05%20123029.png)   
@@ -37,7 +37,8 @@ it seem just a print func ,we need using xref to find the calling func , target 
 it only one derection!!!  step in it !
 
 ### check the graph overview
-only one area uisng __jal__ to jump to this address   
+only one area uisng __jal__ to jump to this address
+![image]()
 So we look back along this area  
 at there you can find many structures like this  
 ![image](https://github.com/Yoloyolo26/ELF-MIPS---Basic-Crackme-RootMe-/blob/main/images/structure%202025-08-05%20130711.png)   
